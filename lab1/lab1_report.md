@@ -147,7 +147,7 @@ Date of finished:
 
     sudo ./easyrsa build-client-full RouterOS nopass
 
-Осталось переместить ключи в отдельную папку, например в */etc/openvpb/clients/RouterOS*:
+Осталось переместить ключи в отдельную папку, например в */etc/openvpn/clients/RouterOS*:
 
     sudo mkdir clients
     sudo mkdir clients/RouterOS

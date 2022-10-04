@@ -159,24 +159,24 @@ Date of finished:
 
 Далее следует открыть веб-интерфейс RouterOS и перенести туда загруженные три файла.
 
-    ![image](https://user-images.githubusercontent.com/92050519/193788796-2dac0c03-496f-42ea-bf5a-79ae36b8e51a.png)
+![image](https://user-images.githubusercontent.com/92050519/193788796-2dac0c03-496f-42ea-bf5a-79ae36b8e51a.png)
 
 Затем, во вкладке *System/Certificates* добавить ключи. 
 
-    ![image](https://user-images.githubusercontent.com/92050519/193788940-ea4cf716-5931-4e10-bfca-f46740941983.png)
+![image](https://user-images.githubusercontent.com/92050519/193788940-ea4cf716-5931-4e10-bfca-f46740941983.png)
 
 Во вкладке *PPP* добавить *OVPN Client*.
 
-    ![image](https://user-images.githubusercontent.com/92050519/193789049-f68ec664-13a6-4657-81b7-24d40437d308.png)
+![image](https://user-images.githubusercontent.com/92050519/193789049-f68ec664-13a6-4657-81b7-24d40437d308.png)
 
 Указать внеешний адрес сервера, имя пользователя и сертификат.
 
-    ![image](https://user-images.githubusercontent.com/92050519/193789238-d811c91f-b99d-4111-88f5-40b46e4039ea.png)
+![image](https://user-images.githubusercontent.com/92050519/193789238-d811c91f-b99d-4111-88f5-40b46e4039ea.png)
 
 Проверить соединение.
 
-    ![image](https://user-images.githubusercontent.com/92050519/193790262-4512c73e-5b20-4771-ad1c-a73505aca01f.png)
-    ![image](https://user-images.githubusercontent.com/92050519/193790366-aab96aae-4855-41b7-ab5d-e74034e17ed9.png)
-    ![image](https://user-images.githubusercontent.com/92050519/193790451-e777aca1-bb74-4bc1-a3ec-398e1c417780.png)
+![image](https://user-images.githubusercontent.com/92050519/193790262-4512c73e-5b20-4771-ad1c-a73505aca01f.png)
+![image](https://user-images.githubusercontent.com/92050519/193790366-aab96aae-4855-41b7-ab5d-e74034e17ed9.png)
+![image](https://user-images.githubusercontent.com/92050519/193790451-e777aca1-bb74-4bc1-a3ec-398e1c417780.png)
 
 Вывод: в ходе выполнения лабораторной работы был получен базовый опыт настройки VPN, используя OpenVPN, и работы с облачным провайдером на примере YandexCloud.

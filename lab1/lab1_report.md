@@ -130,7 +130,7 @@ Date of finished:
 Осталось настроить бранмауэр, нужно посмотреть интерфейсы для внешней сети и для внутренней и разрешить трафик между ними:
 
     ip -br a
-    ![image](https://user-images.githubusercontent.com/92050519/193788578-1c8913a0-8df6-4221-85f7-8b11eca5bab2.png)
+![image](https://user-images.githubusercontent.com/92050519/193788578-1c8913a0-8df6-4221-85f7-8b11eca5bab2.png)
     sudo iptables -I FORWARD -i tun0 -o eth0 -j ACCEPT
     sudo iptables -I FORWARD -i eth0 -o tun0 -j ACCEPT
 

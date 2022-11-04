@@ -52,3 +52,60 @@ Date of finished:
 ![Screenshot_3](https://user-images.githubusercontent.com/92050519/200081255-c5d3d527-e0b3-403b-badc-8c85579a53c4.jpg)
 
 5. Используя Ansible настроить сразу два CHR
+
+Сначало необходимо установить Ansible:
+
+    sudo pip install ansible
+    
+Для файлов Ansible нужно создать дирикторию:
+
+    mkdir /etc/ansible
+    
+Для использования не настроек по умолчанию можно либо создать файл *ansible.cgf*, который будет использоваться как файл настроек по умолчанию для файлов в текущей директории, или создать файл с иным названием и указывать этот файл при вызове плейбука через флаг *-i*. В лабораторной работе создан файл *ansible.cfg*:
+    
+    touch /etc/nsible/ansible.cfg
+    nano /etc/ansible/ansible.cfg
+    
+    [defaults]
+    inventory = ./hosts
+    remote_tmp = /etc/ansible/ansible_tmp/
+    
+В качестве файла inventory указан файл hosts, в этом файле должны быть прописаны устройства и параметры для подключения к ним:
+
+    touch /etc/ansible/hosts
+    nano /etc/ansible/hosts
+    
+    [routers]
+    router1 ansible_host=10.8.0.4 ansible_ssh_user=Ansible ansible_ssh_pass=Ansible
+    router2 ansible_host=10.8.0.8 ansible_ssh_user=Ansible ansible_ssh_pass=Ansible
+    
+    [routers:vars]
+    ansible_connection=ansible.netcommon.network_cli
+    ansible_network_os=community.routeros.routeros
+    
+В квадратных скобках указывается имя группы устройств, через *<имя группы>:vars* можно указать повторяющееся параметры для группы устройств. Параметр *ansible_host* указывается адрес устройства, *ansible_ssh_user* и *ansible_ssh_pass* указываются логин и пароль для ssh подключения. Параметр *ansible.netcommon.network_cli* используется для ssh соединения к сетевым устройсвам, а параметр *community.routeros.routeros* указывает операционную систему *RouterOS*, на которой работают CHR.
+
+Команды для выполнения пишутся в таске, таск в плее, плей в плейбуке - файле с разрешением yml. Нужно создать файл и указать команды для выполения:
+    
+    touch /etc/ansible/data_set.yml
+    nano data_set.yml
+    
+    - name: Routers config set
+      hosts: routers
+      gather_facts: false
+      tasks:
+        - name: Login_password set
+          routeros_command:
+            - /user add name=Ansible2 password=Ansible group=full
+        - name: NTP Client set
+          routeros_command:
+            commands:
+              - /system clock set time-zone=+3
+              - /system ntp client set enabled=yes primary-ntp=88.147.254.230
+        - name: OSPF config set
+          routeros_command:
+            commands:
+              - /interface bridge add name=loopback
+              - /ip address add address=4.4.4.4/32 interface=loopback
+              - /routing ospf instance set router-id=4.4.4.4 number=0
+              - /routing ospf network add network=192.168.0.0/24 area=backbone

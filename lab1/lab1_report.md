@@ -6,7 +6,7 @@ Group: K34212
 Author: Leshkov Roman Sergeevich
 Lab: Lab1
 Date of create: 20.09.2022
-Date of finished: 
+Date of finished: 18.10.2022
 
 Цель работы: 
 Целью данной работы является развертывание виртуальной машины в облачном сервисе с установленной системой контроля конфигураций Ansible и установка CHR в VirtualBox

@@ -109,7 +109,6 @@ Date of finished:
             - /ip address add address=4.4.4.4/32 interface=loopback
             - /routing ospf instance set router-id=4.4.4.4 number=0
             - /routing ospf network add network=192.168.0.0/24 area=backbone
-            - /routing ospf network add network=192.168.0.0/24 area=backbone
             
 ![Screenshot_4](https://user-images.githubusercontent.com/92050519/200091796-67e7caa4-5a46-4254-8a5e-1db804e11571.jpg)
 

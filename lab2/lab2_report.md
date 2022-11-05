@@ -94,18 +94,66 @@ Date of finished:
       hosts: routers
       gather_facts: false
       tasks:
-        - name: Login_password set
-          routeros_command:
-            - /user add name=Ansible2 password=Ansible group=full
-        - name: NTP Client set
-          routeros_command:
-            commands:
-              - /system clock set time-zone=+3
-              - /system ntp client set enabled=yes primary-ntp=88.147.254.230
-        - name: OSPF config set
-          routeros_command:
-            commands:
-              - /interface bridge add name=loopback
-              - /ip address add address=4.4.4.4/32 interface=loopback
-              - /routing ospf instance set router-id=4.4.4.4 number=0
-              - /routing ospf network add network=192.168.0.0/24 area=backbone
+      - name: Login_password set
+        routeros_command:
+        - /user add name=Ansible2 password=Ansible group=full
+      - name: NTP Client set
+        routeros_command:
+          commands:
+            - /system clock set time-zone-name=Europe/Moscow
+            - /system ntp client set enabled=yes primary-ntp=88.147.254.230
+      - name: OSPF config set
+        routeros_command:
+          commands:
+            - /interface bridge add name=loopback
+            - /ip address add address=4.4.4.4/32 interface=loopback
+            - /routing ospf instance set router-id=4.4.4.4 number=0
+            - /routing ospf network add network=192.168.0.0/24 area=backbone
+
+![Screenshot_4](https://user-images.githubusercontent.com/92050519/200091796-67e7caa4-5a46-4254-8a5e-1db804e11571.jpg)
+
+![Screenshot_8](https://user-images.githubusercontent.com/92050519/200091744-c0ffa075-0c6a-4118-b339-ea393fa3492f.jpg)
+
+![Screenshot_9](https://user-images.githubusercontent.com/92050519/200091746-148cfda6-2e83-4a8e-92b9-25fc001ad27b.jpg)
+
+![Screenshot_10](https://user-images.githubusercontent.com/92050519/200091748-389b65ba-6b3b-4d83-8c26-a7a3baa758d0.jpg)
+
+![Screenshot_11](https://user-images.githubusercontent.com/92050519/200091753-ba8304fa-7a19-4cd1-a29a-11081eeb4bf9.jpg)
+
+В этом плейбуке указан один плей, который называется *Routers config set*, он будет выполнен на устройствах в группе *routers*, будут выполнены три таски: создание пользователя, установка временной зоны на GSM +3 и сервера NTP, и настройка OSPF с router-id=4.4.4.4 и сетью 192.168.0.0/24.
+
+Для сбора данных создан еще один плейбук *data_get.yml*:
+
+    touch /etc/ansible/data_get.yml
+    nano data_set.yml
+    
+    - name: Getting data from routers
+      hosts: routers
+      gather_facts: false
+      tasks:
+      - name: get_ospf_topology
+        routeros_command:
+          commands:
+          - /routing ospf neighbor print
+        register: ospf_topology
+      - name: get_router_config
+        routeros_command:
+          commands:
+          - /export compact
+        register: router_config
+      - name: Saving ospf topology
+        copy:
+          content: "{% for x in ospf_topology.stdout.0 if x!=''%}"{{x}}\n{% endfor %}"
+          dest: /etc/ansible/files/ospf_topology_{{inventory_hostname}}.log
+      - name: Saving router config
+        copy:
+          content: "{% for x in router_config.stdout.0 if x!=''%}"{{x}}\n{% endfor %}"
+          dest: /etc/ansible/files/{{inventory_hostname}}_config.log
+
+![Screenshot_5](https://user-images.githubusercontent.com/92050519/200091810-4025841a-cab3-462f-9b76-1a342c9d4a7f.jpg)
+
+![Screenshot_6](https://user-images.githubusercontent.com/92050519/200092118-01c8196a-0923-4a59-97f3-2a2390b3dd9f.jpg)
+
+![Screenshot_7](https://user-images.githubusercontent.com/92050519/200092123-aa3184ee-2fb1-4dbf-98a9-fcd63369ea82.jpg)
+
+Топология OSPF просматривается через соседей OSPF, а конфиг через команду *export compact*, в конце таски вывод консоли сохраняется в переменную через команду *register*, через блок *copy* переменная записывается в файл.

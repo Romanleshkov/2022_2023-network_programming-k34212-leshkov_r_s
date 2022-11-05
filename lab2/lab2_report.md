@@ -109,7 +109,8 @@ Date of finished:
             - /ip address add address=4.4.4.4/32 interface=loopback
             - /routing ospf instance set router-id=4.4.4.4 number=0
             - /routing ospf network add network=192.168.0.0/24 area=backbone
-
+            - /routing ospf network add network=192.168.0.0/24 area=backbone
+            
 ![Screenshot_4](https://user-images.githubusercontent.com/92050519/200091796-67e7caa4-5a46-4254-8a5e-1db804e11571.jpg)
 
 ![Screenshot_8](https://user-images.githubusercontent.com/92050519/200091744-c0ffa075-0c6a-4118-b339-ea393fa3492f.jpg)
@@ -152,8 +153,24 @@ Date of finished:
 
 ![Screenshot_5](https://user-images.githubusercontent.com/92050519/200091810-4025841a-cab3-462f-9b76-1a342c9d4a7f.jpg)
 
-![Screenshot_6](https://user-images.githubusercontent.com/92050519/200092118-01c8196a-0923-4a59-97f3-2a2390b3dd9f.jpg)
+![Screenshot_6](https://user-images.githubusercontent.com/92050519/200095839-29605d9b-5603-4504-bb26-7d399e900230.jpg)
 
-![Screenshot_7](https://user-images.githubusercontent.com/92050519/200092123-aa3184ee-2fb1-4dbf-98a9-fcd63369ea82.jpg)
+![Screenshot_7](https://user-images.githubusercontent.com/92050519/200095843-4c9028b2-f4df-4138-8948-a35caf5a1005.jpg)
 
-Топология OSPF просматривается через соседей OSPF, а конфиг через команду *export compact*, в конце таски вывод консоли сохраняется в переменную через команду *register*, через блок *copy* переменная записывается в файл.
+Топология OSPF просматривается через соседей OSPF, так как в Router ID у двух роутеров прописан одинаковый, то делиться путями в одной зоне они не будут, а конфиг получен через команду *export compact*, в конце таски вывод консоли сохраняется в переменную через команду *register*, через блок *copy* переменная записывается в файл.
+
+В итоге, получена следующая топология:
+
+![Screenshot_16](https://user-images.githubusercontent.com/92050519/200093904-d27fd169-0baa-4a4a-b307-4a78e1e852c4.jpg)
+
+По OVPN связь идет:
+
+![Screenshot_12](https://user-images.githubusercontent.com/92050519/200093929-7c505726-090c-42f0-80c2-aabff75a70a7.jpg)
+
+![Screenshot_13](https://user-images.githubusercontent.com/92050519/200093960-7291f11e-70c2-4b32-9bf7-0fd2fcb4f3c3.jpg)
+
+![Screenshot_14](https://user-images.githubusercontent.com/92050519/200093959-4b58c4cf-a6b6-42eb-920c-c47adec3bb58.jpg)
+
+![Screenshot_15](https://user-images.githubusercontent.com/92050519/200093966-0b0adb58-775a-484c-87a7-bbf7e699eed0.jpg)
+
+Вывод: Ansible мощный инструмент для множественного конфигурирования устройств и сбора информации с устройств.

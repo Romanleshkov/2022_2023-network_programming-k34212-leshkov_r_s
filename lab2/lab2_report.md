@@ -6,7 +6,7 @@ Group: K34212
 Author: Leshkov Roman Sergeevich
 Lab: Lab2
 Date of create: 5.11.2022
-Date of finished: 
+Date of finished: 15.11.2022
 
 Цель работы: С помощью Ansible настроить несколько сетевых устройств и собрать информацию о них. Правильно собрать файл Inventory.
 

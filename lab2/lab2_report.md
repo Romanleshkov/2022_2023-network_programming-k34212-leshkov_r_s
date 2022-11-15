@@ -168,8 +168,8 @@ Date of finished:
 
 ![Screenshot_13](https://user-images.githubusercontent.com/92050519/200093960-7291f11e-70c2-4b32-9bf7-0fd2fcb4f3c3.jpg)
 
-![Screenshot_14](https://user-images.githubusercontent.com/92050519/200093959-4b58c4cf-a6b6-42eb-920c-c47adec3bb58.jpg)
-
 ![Screenshot_15](https://user-images.githubusercontent.com/92050519/200093966-0b0adb58-775a-484c-87a7-bbf7e699eed0.jpg)
+
+![Screenshot_14](https://user-images.githubusercontent.com/92050519/200093959-4b58c4cf-a6b6-42eb-920c-c47adec3bb58.jpg)
 
 Вывод: Ansible мощный инструмент для множественного конфигурирования устройств и сбора информации с устройств.

@@ -21,4 +21,16 @@ services:
       - 8000:8080
 EOF
 sudo docker-compose pull
-sudo docker-compose up
+sudo docker-compose up -d
+
+                                           
+---
+plugin: netbox.netbox.nb_inventory
+api_endpoint: http://localhost:8000/
+token: 0123456789abcdef0123456789abcdef01234567
+validate_certs: False
+config_context: False
+group_by:
+   - device_roles
+compose: {ansible_network_os: community.routeros.routeros, ansible_connection: ansible.netcommon.network_cli}
+interfaces: 'True'

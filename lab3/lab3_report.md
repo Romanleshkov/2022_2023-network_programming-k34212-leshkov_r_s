@@ -6,22 +6,41 @@ Group: K34212
 Author: Leshkov Roman Sergeevich
 Lab: Lab3
 Date of create: 16.11.2022
-Date of finished: 13.01.2023
+Date of finished: 15.01.2023
 
-cd /etc
-sudo apt install docker
-sudo apt install docker-compose
-sudo git clone -b release https://github.com/netbox-community/netbox-docker.git
-cd netbox-docker
-sudo tee docker-compose.override.yml <<EOF
-version: '3.4'
-services:
-  netbox:
-    ports:
-      - 8000:8080
-EOF
-sudo docker-compose pull
-sudo docker-compose up -d
+Цель работы: 
+Написать плейбуки для занесения ионформации с Netbox на роутеры и с роутеров на Netbox.
+Ход работы:
+Для начала поднимается Netbox в контейнере, для этого необходимо установить docker и docker-compose.
+    
+    sudo apt install docker
+    sudo apt install docker-compose
+
+После скачивается репозиторий для развертывания контейров с github.
+
+    cd /etc
+    sudo git clone -b release https://github.com/netbox-community/netbox-docker.git
+    cd netbox-docker
+    
+В файле env/netbox.env, можно поменять логин, пароль и API-токен. Далее, создается файл docker-compose.override.yml:
+    
+    sudo tee docker-compose.override.yml <<EOF
+    version: '3.4'
+    services:
+      netbox:
+        ports:
+          - 8000:8080
+    EOF
+    
+В созданном файле docker-compose.override.yml указан порт хоста 8000, что значит, что Netbox доступен по адресу <адрес хоста>:8000/. 
+После установки настроек запускаются контейнеры:
+
+    sudo docker-compose pull
+    sudo docker-compose up -d
+    
+Ключ -d запускает контейнеры в фоне, оставляя доступ к терминалу.
+
+В браузере открываетcя <адрес хоста>:8000/
 
 
 ---

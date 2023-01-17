@@ -9,8 +9,11 @@ Date of create: 16.11.2022
 Date of finished: 15.01.2023
 
 Цель работы: 
+
 Написать плейбуки для занесения ионформации с Netbox на роутеры и с роутеров на Netbox.
+
 Ход работы:
+
 Для начала поднимается Netbox в контейнере, для этого необходимо установить docker и docker-compose.
     
     sudo apt install docker
